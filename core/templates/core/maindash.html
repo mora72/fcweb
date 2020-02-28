@@ -1,17 +1,82 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
-{% block title %}FC WEB{% endblock %}
+{% block title %}Personal Budget{% endblock %}
+{% load humanize %}
 
 {% block content %}
-<div class="offset-1 col-9 listalocais-div">
-    <h2>FC WEB</h2>
-
-    <div class="flex-container">
-
-    </div>
-
-    <div class="container lista-locais">
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="offset-0 col-md-4 maindash-div">
+            <h2>Saldo de Meios de Pagamento</h2>
+            <div class="container lista-saldo">
+                <table class="table">   <!--  table-bordered table-sm  -->
+                    <thead>
+                    <tr>
+                        <th>Meio de Pagamento</th>
+                        <th class="text-right">Saldo Inicial</th>
+                        <th class="text-right">Saldo Final</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for saldo in listasaldo %}
+                    <tr>
+                        <td><span><a href="/local/{{local.id}}">{{saldo.nomemeio}}</a></span></td>
+                        <td class="text-right">{{saldo.saldo | floatformat:2 | intcomma}}</td>
+                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="offset-0 col-md-4 maindash-div">
+            <h2>Resultado do Mês x Budget</h2>
+            <div class="container lista-saldo">
+                <table class="table">   <!--  table-bordered table-sm  -->
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-right">Real</th>
+                        <th class="text-right">Budget</th>
+                        <th class="text-right">Delta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for saldo in listasaldo %}
+                    <tr>
+                        <td><span><a href="/local/{{local.id}}">{{saldo.nomemeio}}</a></span></td>
+                        <td class="text-right">{{saldo.saldo | floatformat:2 | intcomma}}</td>
+                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
+                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="offset-0 col-md-4 maindash-div">
+            <h2>Resumo Patrimonial</h2>
+            <div class="container lista-saldo">
+                <table class="table">   <!--  table-bordered table-sm  -->
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-right">Saldo Inicial</th>
+                        <th class="text-right">Saldo Final</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for saldo in listasaldo %}
+                    <tr>
+                        <td><span><a href="/local/{{local.id}}">{{saldo.nomemeio}}</a></span></td>
+                        <td class="text-right">{{saldo.saldo | floatformat:2 | intcomma}}</td>
+                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
