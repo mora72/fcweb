@@ -42,14 +42,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for saldo in listasaldo %}
-                    <tr>
-                        <td><span><a href="/local/{{local.id}}">{{saldo.nomemeio}}</a></span></td>
-                        <td class="text-right">{{saldo.saldo | floatformat:2 | intcomma}}</td>
-                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
-                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
-                    </tr>
-                    {% endfor %}
+                        <tr>
+                            <td><span><a href="/local/{{local.id}}">Receitas</a></span></td>
+                            <td class="text-right">{{listaresultmes.vlrrecreal | floatformat:2}}</td>
+                            <td class="text-right">{{listaresultmes.vlrrecprev | floatformat:2}}</td>
+                            <td class="text-right">{{listaresultmes.vlrrecdelta | floatformat:2}}</td>
+                        </tr>
+                        <tr>
+                            <td><span><a href="/local/{{local.id}}">Despesas</a></span></td>
+                            <td class="text-right">{{listaresultmes.vlrdesreal | floatformat:2}}</td>
+                            <td class="text-right">{{listaresultmes.vlrdesprev | floatformat:2}}</td>
+                            <td class="text-right">{{listaresultmes.vlrdesdelta | floatformat:2}}</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td><span><a href="/local/{{local.id}}">RESULTADO LIQ.</a></span></td>
+                            <td class="text-right">{{listaresultmes.vlrrealdelta | floatformat:2}}</td>
+                            <td class="text-right">{{listaresultmes.vlrprevdelta | floatformat:2}}</td>
+                            <td class="text-right">{{listaresultmes.vlrdeltadelta | floatformat:2}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -66,13 +76,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for saldo in listasaldo %}
-                    <tr>
-                        <td><span><a href="/local/{{local.id}}">{{saldo.nomemeio}}</a></span></td>
-                        <td class="text-right">{{saldo.saldo | floatformat:2 | intcomma}}</td>
-                        <td class="text-right">{{saldo.saldofim | floatformat:2 | intcomma}}</td>
-                    </tr>
-                    {% endfor %}
+                        <tr>
+                            <td><span><a href="/local/{{local.id}}">Provisão</a></span></td>
+                            <td class="text-right">{{listapatr.saldoprovini | floatformat:2}}</td>
+                            <td class="text-right">{{listapatr.saldoprovfim | floatformat:2}}</td>
+                        </tr>
+                        <tr>
+                            <td><span><a href="/local/{{local.id}}">Capital Giro</a></span></td>
+                            <td class="text-right">{{listapatr.saldocapgiroini | floatformat:2}}</td>
+                            <td class="text-right">{{listapatr.saldocapgirofim | floatformat:2}}</td>
+                        </tr>
+                        <tr>
+                            <td><span><a href="/local/{{local.id}}">Aposentadoria</a></span></td>
+                            <td class="text-right">{{listapatr.totaposentini | floatformat:2}}</td>
+                            <td class="text-right">{{listapatr.totaposentfim | floatformat:2}}</td>
+                        </tr>
+                        <tr class="table-active">
+                            <td><span><a href="/local/{{local.id}}">TOTAL</a></span></td>
+                            <td class="text-right">{{listapatr.totsaldoini | floatformat:2}}</td>
+                            <td class="text-right">{{listapatr.totsaldofim | floatformat:2}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

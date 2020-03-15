@@ -19,7 +19,7 @@
 
 /* Main Dash */
 .maindash-div {
-    margin-left: -10px;
+    margin-left: 0px;
 }
 .maindash-div h2 {
     font-size: 16px;
@@ -28,46 +28,16 @@
     margin-top: 40px;
 }
 .lista-saldo td {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
 }
 
 .lista-saldo td.text-right {
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 12px;
 }
 
 .lista-saldo th {
     font-size: 13px;
-}
-
-/* Lista Irmãos */
-.listairmaos-div {
-    margin-left: 50px;
-}
-
-.listairmaos-div h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-left: 350px;
-}
-
-.circle {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  position: relative;
-}
-
-.circle img {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.table-irmaos td {
-    vertical-align: middle;
 }
 
 /* Local New */
@@ -103,52 +73,6 @@
     color: blue;
 }
 
-/* Irmão New */
-.irmaonew-div h2 {
-    font-size: 23px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-left: 0px;
-    margin-bottom: 30px;
-    padding: 0;
-    color: blue;
-}
-
-/* Irmão Edit */
-.irmaoedit-div h2 {
-    font-size: 23px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-left: 0px;
-    margin-bottom: 30px;
-    padding: 0;
-    color: blue;
-}
-
-.irmaoedit-div {
-    margin-top: 100px;
-}
-
-/* Irmão View */
-.imageirmaoview {
-    position: absolute;
-    top: 80px;
-    left: 750px;
-}
-
-.h2irmaoview {
-    position: absolute;
-    font-size: 23px;
-    font-weight: bold;
-    color: blue;
-    top: 110px;
-    left: 240px;
-}
-
-.irmaoview-div {
-    margin-top: 140px;
-}
-
 /* filter uf*/
 .filteruf-div {
     margin-bottom: 15px;
@@ -160,32 +84,6 @@
     display: inline-block;
     width: 160px;
     margin-left: 10px;
-}
-
-/* filter status*/
-.filterstatus-div {
-    margin-bottom: 15px;
-    padding: 0;
-    margin-left: -135px;
-}
-
-#filterstatus {
-    display: inline-block;
-    width: 180px;
-    margin-left: 5px;
-}
-
-/* filter local*/
-.filterlocal-div {
-    margin-bottom: 15px;
-    padding: 0;
-    margin-left: 0px;
-}
-
-#filterlocal {
-    display: inline-block;
-    width: 180px;
-    margin-left: 5px;
 }
 
 /* Search */
@@ -202,37 +100,7 @@
     width: 400px;
 }
 
-.searchirmao-div {
-    padding: 0;
-    margin-left: -70px;
-    margin-bottom: 15px;
-    width: 400px;
-}
-
-.searchlocalinteresse-div {
-    padding: 0;
-    margin-left: 70px;
-    margin-bottom: 15px;
-    width: 330px;
-}
-
 .bot-search-local {
-    position: absolute;
-    color: blue;
-    top: 12px;
-    right: 16px;
-    cursor: pointer;  /* pointer para a lupa */
-}
-
-.bot-search-irmao {
-    position: absolute;
-    color: blue;
-    top: 12px;
-    right: 16px;
-    cursor: pointer;  /* pointer para a lupa */
-}
-
-.bot-search-localinteresse {
     position: absolute;
     color: blue;
     top: 12px;
@@ -260,17 +128,19 @@
     vertical-align: middle;
 }
 
-/* botão adicionar Irmão */
-#btnirmaonew {
-    margin-left: 20px;
-    width: 95px;
-    height: 34px;
-    font-size: 16px;
-    font-weight: bold;
-    vertical-align: middle;
-}
-
 /* Tira asterísco dos campos obrigatórios */
 .asteriskField {
     display: none;
+}
+
+/* Lista Grupos */
+
+.listatrans-div h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 450px;
+}
+
+.lista-trans {
+    margin-left: 60px;
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block title %}Transações{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-9 listatrans-div">
+    <h2>Transações</h2>
+    <div class="flex-container">
+        <!-- Configuração da ação do filtro -->
+        <div class="col-5 column filtermeio-div">
+            <span>Filtrar Meio de Pagamento:</span>
+            <select name="filtermeio" id="filtermeio" class="form-control">
+                <option value="*">Todos</option>
+                {% for meio in listameios %}
+                    {% if filtermeioatual == meio.nome %}
+                        <option value="{{ meio.cod }}" selected>{{ meio.nome }}</option>
+                    {% else %}
+                        <option value="{{ meio.cod }}">{{ meio.nome }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <!-- Configuração do botão criar -->
+        <a class="fas fa-plus btn btn-primary" id="btntransnew" href="/transnew">&nbsp Criar</a>
+    </div>
+
+    {% if messages %}
+    {% for message in messages %}
+    <ul class="messagelist">
+        <li {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible" {% endif %} > <strong>{{message}}</strong> </li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+    <div class="container lista-trans">
+        <table class="table">   <!--  table-bordered table-sm  -->
+            <thead>
+            <tr>
+                <th>Dia</th>
+                <th>Mes</th>
+                <th>Ano</th>
+                <th>Valor</th>
+                <th>Conta</th>
+                <th>Descrição</th>
+                <th>Meio</th>
+                <th>Empréstimo</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for trans in listatransfiltro %}
+            <tr>
+                <td>{{trans.dia}}</td>
+                <td>{{trans.mes}}</td>
+                <td>{{trans.ano}}</td>
+                <td>{{trans.valor}}</td>
+                <td>{{trans.conta}}</td>
+                <td>{{trans.descr}}</td>
+                <td>{{trans.meio}}</td>
+                <td>{{trans.nomeemprest}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+</html>
