@@ -14,7 +14,7 @@
     font-size: 17.5px;
 }
 .form-inline {
-    margin-left: 30px;
+    margin-left: 25px;
 }
 
 /* Main Dash */
@@ -73,20 +73,20 @@
     color: blue;
 }
 
-/* filter uf*/
-.filteruf-div {
+/* filter meio*/
+.filtermeio-div {
     margin-bottom: 15px;
     padding: 0;
-    margin-left: 130px;
+    margin-left: 150px;
 }
 
-#filteruf {
-    display: inline-block;
+#filtermeio {
     width: 160px;
     margin-left: 10px;
+    display: inline-block;
 }
 
-/* Search */
+/* Search
 .flex-container {
   display: flex;
   flex-direction: row;
@@ -105,11 +105,10 @@
     color: blue;
     top: 12px;
     right: 16px;
-    cursor: pointer;  /* pointer para a lupa */
-}
+    cursor: pointer;  /* pointer para a lupa
+} */
 
 /* Messages */
-
 .messagelist {
     margin-left: 125px;
     width: 700px;
@@ -118,9 +117,12 @@
 }
 
 /* botão adicionar Local */
+.btntransnew-div {
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
 #btnlocalnew {
-    position: absolute;
-    margin-left: 800px;
     width: 95px;
     height: 35px;
     font-size: 16px;
@@ -136,11 +138,8 @@
 /* Lista Grupos */
 
 .listatrans-div h2 {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-left: 450px;
-}
-
-.lista-trans {
-    margin-left: 60px;
+    margin-top: 15px;
+    margin-left: 550px;
 }

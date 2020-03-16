@@ -116,4 +116,5 @@ def trans_list(request):
             listatransfiltro = listatrans
     else:
         listatransfiltro = listatrans
-    return render(request, 'core/trans.html', {'listatransfiltro': listatransfiltro, 'listameios': listameios})
+    return render(request, 'core/trans.html', {'listatransfiltro': listatransfiltro, 'listameios': listameios,
+                                               'filtermeioatual': filtermeio})

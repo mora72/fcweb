@@ -4,16 +4,16 @@
 {% block title %}Transações{% endblock %}
 
 {% block content %}
-<div class="offset-1 col-9 listatrans-div">
+<div class="container-fluid listatrans-div">
     <h2>Transações</h2>
-    <div class="flex-container">
+    <div class="row">
+        <div class="col-md-8 filtermeio-div">
         <!-- Configuração da ação do filtro -->
-        <div class="col-5 column filtermeio-div">
-            <span>Filtrar Meio de Pagamento:</span>
+            <span>Meio de Pagamento:</span>
             <select name="filtermeio" id="filtermeio" class="form-control">
                 <option value="*">Todos</option>
                 {% for meio in listameios %}
-                    {% if filtermeioatual == meio.nome %}
+                    {% if filtermeioatual == meio.cod %}
                         <option value="{{ meio.cod }}" selected>{{ meio.nome }}</option>
                     {% else %}
                         <option value="{{ meio.cod }}">{{ meio.nome }}</option>
@@ -21,8 +21,11 @@
                 {% endfor %}
             </select>
         </div>
-        <!-- Configuração do botão criar -->
-        <a class="fas fa-plus btn btn-primary" id="btntransnew" href="/transnew">&nbsp Criar</a>
+        <div class="col-md-2 btntransnew-div">
+            <!-- Configuração do botão criar -->
+            <!-- <h2>Transações</h2> -->
+            <a class="fas fa-plus btn btn-primary" id="btntransnew" href="/transnew">&nbsp Criar</a>
+        </div>
     </div>
 
     {% if messages %}
@@ -32,7 +35,7 @@
     </ul>
     {% endfor %}
     {% endif %}
-    <div class="container lista-trans">
+    <div class="container tab-trans">
         <table class="table">   <!--  table-bordered table-sm  -->
             <thead>
             <tr>
