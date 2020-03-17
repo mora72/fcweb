@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from core.arquivos import *
 from datetime import date
+from .forms import TransFormEdit
 
 
 def main_dash(request):
@@ -118,3 +119,30 @@ def trans_list(request):
         listatransfiltro = listatrans
     return render(request, 'core/trans.html', {'listatransfiltro': listatransfiltro, 'listameios': listameios,
                                                'filtermeioatual': filtermeio})
+
+
+def trans_new(request):
+    anotrabalho = date.today().year
+    mestrabalho = date.today().month
+
+    listatrans = abrearquivo('listatrans')
+
+    if request.method == 'POST':
+        form = TransFormEdit(request.POST)
+        if form.is_valid():
+            registrotrans = {'ano': anotrabalho,
+                             'mes': mestrabalho,
+                             'dia': int(form['trans_dia'].value()),
+                             'valor': float(form['trans_valor'].value()),
+                             'conta': form['trans_conta'].value(),
+                             'descr': form['trans_descr'].value(),
+                             'meio': form['trans_meio'].value(),
+                             'nomeemprest': form['trans_emprest'].value()}
+            listatrans.append(registrotrans.copy())
+            fechaarquivo('listatrans', listatrans)
+            return redirect('/trans/')
+        else:
+            return render(request, 'core/transnew.html', {'form': form})
+    else:
+        form = TransFormEdit()
+        return render(request, 'core/transnew.html', {'form': form})

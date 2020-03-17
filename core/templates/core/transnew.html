@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Adicionar Transação{% endblock %}
+
+{% block content %}
+<div class="offset-3 col-8 transnew-div">
+    <h2>Adicione uma nova Transação:</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
+{% endblock %}
