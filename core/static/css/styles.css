@@ -86,6 +86,13 @@
     display: inline-block;
 }
 
+#saldomeio {
+    margin-left: 200px;
+    margin-top: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /* Search
 .flex-container {
   display: flex;
@@ -135,11 +142,16 @@
     display: none;
 }
 
-/* Lista Grupos */
+/* Lista Transações */
 
 .listatrans-div h2 {
     font-size: 22px;
     font-weight: bold;
     margin-top: 15px;
     margin-left: 550px;
+}
+
+.lista-trans td {
+    font-size: 12px;
+    font-weight: bold;
 }

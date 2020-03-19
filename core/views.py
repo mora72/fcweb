@@ -94,10 +94,11 @@ def main_dash(request):
 
 
 def trans_list(request):
-    anotrabalho = date.today().year
-    mestrabalho = date.today().month
+    ano = date.today().year
+    mes = date.today().month
+    saldo = 0
 
-    # listameiossaldo = abrearquivo('listameiosaldo')
+    listameiossaldo = abrearquivo('listameiosaldo')
     listameios = abrearquivo('listameios')
     listatrans = abrearquivo('listatrans')
 
@@ -107,31 +108,35 @@ def trans_list(request):
     #    filtermeio = int(filtermeio)
     # if searchgrupo:
     #     lista_grupos = lista_grupos.filter(nome__icontains=searchgrupo).order_by('nome')
-    if filtermeio:
-        if filtermeio != '*':
-            listatransfiltro = []
-            for x in listatrans:
-                if x['meio'] == filtermeio and x['ano'] == anotrabalho and x['mes'] == mestrabalho:
-                    listatransfiltro.append(x)
-        else:
-            listatransfiltro = listatrans
+    listatransfiltro = []
+    if (not filtermeio) or filtermeio == '*':
+        for x in listatrans:
+            if x['ano'] == ano and x['mes'] == mes:
+                listatransfiltro.append(x)
     else:
-        listatransfiltro = listatrans
+        listatransfiltro = []
+        saldo = ler_saldo_fim_meio(listameiossaldo, filtermeio, mes, ano)
+        for x in listatrans:
+            if x['meio'] == filtermeio and x['ano'] == ano and x['mes'] == mes:
+                listatransfiltro.append(x)
     return render(request, 'core/trans.html', {'listatransfiltro': listatransfiltro, 'listameios': listameios,
-                                               'filtermeioatual': filtermeio})
+                                               'filtermeioatual': filtermeio, 'saldo': saldo})
 
 
 def trans_new(request):
-    anotrabalho = date.today().year
-    mestrabalho = date.today().month
-
-    listatrans = abrearquivo('listatrans')
+    ano = date.today().year
+    mes = date.today().month
 
     if request.method == 'POST':
         form = TransFormEdit(request.POST)
         if form.is_valid():
-            registrotrans = {'ano': anotrabalho,
-                             'mes': mestrabalho,
+            listatrans = abrearquivo('listatrans')
+            listameiossaldo = abrearquivo('listameiosaldo')
+            saldo = ler_saldo_fim_meio(listameiossaldo, form['trans_meio'].value(), mes, ano)
+            saldo += float(form['trans_valor'].value())
+            grava_saldo_fim_meio(listameiossaldo, form['trans_meio'].value(), mes, ano, saldo)
+            registrotrans = {'ano': ano,
+                             'mes': mes,
                              'dia': int(form['trans_dia'].value()),
                              'valor': float(form['trans_valor'].value()),
                              'conta': form['trans_conta'].value(),
@@ -140,9 +145,25 @@ def trans_new(request):
                              'nomeemprest': form['trans_emprest'].value()}
             listatrans.append(registrotrans.copy())
             fechaarquivo('listatrans', listatrans)
+            fechaarquivo('listameiosaldo', listameiossaldo)
             return redirect('/trans/')
         else:
             return render(request, 'core/transnew.html', {'form': form})
     else:
         form = TransFormEdit()
         return render(request, 'core/transnew.html', {'form': form})
+
+
+def ler_saldo_fim_meio(listameiossaldo, meio, mes, ano):
+    saldofim = 0
+    for x in listameiossaldo:
+        if x["mes"] == mes and x["ano"] == ano and x['cod'] == meio:
+            saldofim = x["saldofim"]
+    return saldofim
+
+
+def grava_saldo_fim_meio(listameiossaldo, meio, mes, ano, saldofim):
+    for x in listameiossaldo:
+        if x["mes"] == mes and x["ano"] == ano and x['cod'] == meio:
+            x["saldofim"] = saldofim
+            break

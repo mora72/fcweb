@@ -2,12 +2,14 @@
 <html lang="en">
 {% extends 'base.html' %}
 {% block title %}Transações{% endblock %}
+{% load humanize %}
+{% load l10n %}
 
 {% block content %}
 <div class="container-fluid listatrans-div">
     <h2>Transações</h2>
     <div class="row">
-        <div class="col-md-8 filtermeio-div">
+        <div class="col-md-3 filtermeio-div">
         <!-- Configuração da ação do filtro -->
             <span>Meio de Pagamento:</span>
             <select name="filtermeio" id="filtermeio" class="form-control">
@@ -20,6 +22,9 @@
                     {% endif %}
                 {% endfor %}
             </select>
+        </div>
+        <div class="col-md-5 saldomeio-div">
+            <span id="saldomeio">Saldo Meio Pgto: {{saldo | floatformat:2 | intcomma}}</span>
         </div>
         <div class="col-md-2 btntransnew-div">
             <!-- Configuração do botão criar -->
@@ -35,14 +40,14 @@
     </ul>
     {% endfor %}
     {% endif %}
-    <div class="container tab-trans">
+    <div class="container lista-trans">
         <table class="table">   <!--  table-bordered table-sm  -->
             <thead>
             <tr>
                 <th>Dia</th>
                 <th>Mes</th>
                 <th>Ano</th>
-                <th>Valor</th>
+                <th class="text-right">Valor</th>
                 <th>Conta</th>
                 <th>Descrição</th>
                 <th>Meio</th>
@@ -54,8 +59,8 @@
             <tr>
                 <td>{{trans.dia}}</td>
                 <td>{{trans.mes}}</td>
-                <td>{{trans.ano}}</td>
-                <td>{{trans.valor}}</td>
+                <td>{{trans.ano | unlocalize}}</td>
+                <td class="text-right">{{trans.valor | floatformat:2 | intcomma}}</td>
                 <td>{{trans.conta}}</td>
                 <td>{{trans.descr}}</td>
                 <td>{{trans.meio}}</td>
