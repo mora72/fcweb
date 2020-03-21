@@ -9,7 +9,7 @@
 <div class="container-fluid listatrans-div">
     <h2>Transações</h2>
     <div class="row">
-        <div class="col-md-3 filtermeio-div">
+        <div class="col-md-4 filtermeio-div">
         <!-- Configuração da ação do filtro -->
             <span>Meio de Pagamento:</span>
             <select name="filtermeio" id="filtermeio" class="form-control">
@@ -23,20 +23,22 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="col-md-5 saldomeio-div">
+        <div class="col-md-4 saldomeio-div">
             <span id="saldomeio">Saldo Meio Pgto: {{saldo | floatformat:2 | intcomma}}</span>
         </div>
         <div class="col-md-2 btntransnew-div">
             <!-- Configuração do botão criar -->
             <!-- <h2>Transações</h2> -->
-            <a class="fas fa-plus btn btn-primary" id="btntransnew" href="/trans/transnew">&nbsp Criar</a>
+            <a class="fas fa-plus btn btn-primary" id="btntransnew" href="/trans/transnew/{{ filtermeioatual }}">
+                &nbsp Criar</a>
         </div>
     </div>
 
     {% if messages %}
     {% for message in messages %}
     <ul class="messagelist">
-        <li {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible" {% endif %} > <strong>{{message}}</strong> </li>
+        <li {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible" {% endif %} >
+            <strong>{{message}}</strong> </li>
     </ul>
     {% endfor %}
     {% endif %}
@@ -63,7 +65,7 @@
                 <td class="text-right">{{trans.valor | floatformat:2 | intcomma}}</td>
                 <td>{{trans.conta}}</td>
                 <td>{{trans.descr}}</td>
-                <td>{{trans.meio}}</td>
+                <td>{{trans.nomemeio}}</td>
                 <td>{{trans.nomeemprest}}</td>
             </tr>
             {% endfor %}

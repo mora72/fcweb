@@ -24,7 +24,7 @@ $( document ).ready(function() {
         window.location.href = baseUrl + '?filtermeio=' + filtermeio;
     });
 
-    // Ação da busca Local (click)
+    // Ação da busca (click)
     $(searchBtn).on('click', function() {
         searchForm.submit();
     });

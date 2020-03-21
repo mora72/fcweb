@@ -109,21 +109,27 @@ def trans_list(request):
     # if searchgrupo:
     #     lista_grupos = lista_grupos.filter(nome__icontains=searchgrupo).order_by('nome')
     listatransfiltro = []
+    filternomemeioatual = ''
     if (not filtermeio) or filtermeio == '*':
         for x in listatrans:
             if x['ano'] == ano and x['mes'] == mes:
+                x['nomemeio'] = list(filter(lambda meio: meio["cod"] == x["meio"], listameios))[0]["nome"]
                 listatransfiltro.append(x)
     else:
         listatransfiltro = []
         saldo = ler_saldo_fim_meio(listameiossaldo, filtermeio, mes, ano)
+        filternomemeioatual = list(filter(lambda meio: meio["cod"] == filtermeio, listameios))[0]["nome"]
         for x in listatrans:
             if x['meio'] == filtermeio and x['ano'] == ano and x['mes'] == mes:
+                x['nomemeio'] = filternomemeioatual
                 listatransfiltro.append(x)
-    return render(request, 'core/trans.html', {'listatransfiltro': listatransfiltro, 'listameios': listameios,
-                                               'filtermeioatual': filtermeio, 'saldo': saldo})
+    listatransfiltrosort = sorted(listatransfiltro, key=lambda i: i['dia'], reverse=True)
+    return render(request, 'core/trans.html', {'listatransfiltro': listatransfiltrosort, 'listameios': listameios,
+                                               'filtermeioatual': filtermeio,
+                                               'filternomemeioatual': filternomemeioatual, 'saldo': saldo})
 
 
-def trans_new(request):
+def trans_new(request, meio):
     ano = date.today().year
     mes = date.today().month
 
@@ -146,11 +152,11 @@ def trans_new(request):
             listatrans.append(registrotrans.copy())
             fechaarquivo('listatrans', listatrans)
             fechaarquivo('listameiosaldo', listameiossaldo)
-            return redirect('/trans/')
+            return redirect(f'/trans/?filtermeio={registrotrans["meio"]}')
         else:
             return render(request, 'core/transnew.html', {'form': form})
     else:
-        form = TransFormEdit()
+        form = TransFormEdit(initial={'trans_meio': meio})
         return render(request, 'core/transnew.html', {'form': form})
 
 
