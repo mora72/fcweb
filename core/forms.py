@@ -57,3 +57,9 @@ class TransFormEdit(forms.Form):
             Submit('submit', 'Salvar'),
             HTML('<a class="btn btn-danger" href="/trans/">Voltar</a>')
         )
+
+    def clean_trans_dia(self):
+        dado = self.cleaned_data.get('trans_dia')
+        if dado > 31:
+            raise forms.ValidationError('Dia maior que 31')
+        return dado
