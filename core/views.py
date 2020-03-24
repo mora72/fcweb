@@ -156,7 +156,7 @@ def trans_new(request, meio):
         else:
             return render(request, 'core/transnew.html', {'form': form})
     else:
-        form = TransFormEdit(initial={'trans_meio': meio})
+        form = TransFormEdit(initial={'trans_meio': meio, 'trans_mes': mes, 'trans_ano': ano})
         return render(request, 'core/transnew.html', {'form': form})
 
 
